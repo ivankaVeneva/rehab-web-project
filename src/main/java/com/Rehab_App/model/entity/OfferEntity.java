@@ -1,6 +1,6 @@
 package com.Rehab_App.model.entity;
 
-import com.Rehab_App.model.enums.EngineTypeEnum;
+import com.Rehab_App.model.enums.DeviceTypeEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,7 +25,7 @@ public class OfferEntity extends BaseEntity {
   private int price;
 
   @Enumerated(EnumType.STRING)
-  private EngineTypeEnum engine;
+  private DeviceTypeEnum device;
 
   public Integer getMileage() {
     return mileage;
@@ -45,12 +45,12 @@ public class OfferEntity extends BaseEntity {
     return this;
   }
 
-  public EngineTypeEnum getEngine() {
-    return engine;
+  public DeviceTypeEnum getDevice() {
+    return device;
   }
 
-  public OfferEntity setEngine(EngineTypeEnum engine) {
-    this.engine = engine;
+  public OfferEntity setDevice(DeviceTypeEnum device) {
+    this.device = device;
     return this;
   }
 

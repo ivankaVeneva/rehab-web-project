@@ -1,6 +1,6 @@
 package com.Rehab_App.model.dto;
 
-import com.Rehab_App.model.enums.EngineTypeEnum;
+import com.Rehab_App.model.enums.DeviceTypeEnum;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -13,7 +13,7 @@ public record AddOfferDTO(
         max = 500) String description,//not necessarily from message source
     @NotNull @PositiveOrZero Integer mileage,
     @NotNull @PositiveOrZero Integer price,
-    @NotNull EngineTypeEnum engineType
+    @NotNull DeviceTypeEnum deviceType
 ) {
 
   public static AddOfferDTO empty() {

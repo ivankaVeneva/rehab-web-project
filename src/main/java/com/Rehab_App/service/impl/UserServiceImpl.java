@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
   public Optional<RehabUserDetails> getCurrentUser() {                                    
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();  
     if (authentication != null &&                                                            
-          authentication.getPrincipal() instanceof RehabUserDetails rehableUserDetails) {
-      return Optional.of(rehableUserDetails);                                               
+          authentication.getPrincipal() instanceof RehabUserDetails rehabUserDetails) {
+      return Optional.of(rehabUserDetails);
     }                                                                                        
     return Optional.empty();                                                                 
   }                                                                                          

@@ -1,4 +1,4 @@
-package com.Rehab_App.model.web;
+package com.Rehab_App.web;
 
 import com.Rehab_App.service.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
