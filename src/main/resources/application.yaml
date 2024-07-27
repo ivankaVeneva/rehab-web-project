@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Rehab_App
+    name: Rehab-App
 #  thymeleaf:
 #    check-template-location: true
 #    cache: false
@@ -9,8 +9,8 @@ spring:
 #  port: 8081
   datasource:
     url: jdbc:mysql://localhost:3306/Rehab_App?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: root
-    password: Rotev987
+    username: ${db_username}
+    password: ${db_password}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     defer-datasource-initialization: true
