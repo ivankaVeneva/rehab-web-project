@@ -1,12 +1,12 @@
 spring:
   application:
     name: Rehab-App
-#  thymeleaf:
-#    check-template-location: true
-#    cache: false
-#    prefix: file:./src/main/resources/templates/
-#server:
-#  port: 8081
+  #  thymeleaf:
+  #    check-template-location: true
+  #    cache: false
+  #    prefix: file:./src/main/resources/templates/
+  #server:
+  #  port: 8081
   datasource:
     url: jdbc:mysql://localhost:3306/Rehab_App?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
     username: ${db_username}
@@ -35,7 +35,7 @@ forex:
 
 offers:
   api:
-   baseUrl: "http://localhost:8081"
+    baseUrl: "http://localhost:8081"
 
 jwt:
   secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}

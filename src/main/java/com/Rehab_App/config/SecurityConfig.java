@@ -57,7 +57,7 @@ public class   SecurityConfig {
   @Bean
   public RehabUserDetailsService userDetailsService(UserRepository userRepository) {
     return new RehabUserDetailsService(userRepository);
-  }
+      }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
