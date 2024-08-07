@@ -2,11 +2,32 @@ package com.example.Rehab_offers.web;
 
 import com.example.Rehab_offers.model.dto.AddOfferDTO;
 import com.example.Rehab_offers.model.dto.OfferDTO;
+import com.example.Rehab_offers.service.MonitoringService;
 import com.example.Rehab_offers.service.OfferService;
+
+//import io.swagger.v3.oas.annotations.Operation;
+//import io.swagger.v3.oas.annotations.media.Content;
+//import io.swagger.v3.oas.annotations.media.Schema;
+//import io.swagger.v3.oas.annotations.responses.ApiResponse;
+//import io.swagger.v3.oas.annotations.responses.ApiResponses;
+//import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+//import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,20 +54,31 @@ public class OfferController {
         .ok(offerService.getOfferById(id));
   }
 
+
   @DeleteMapping("/{id}")
-  public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id) {
-    offerService.deleteOffer(id);
+  public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id,
+      @AuthenticationPrincipal UserDetails userDetails) {
+    offerService.deleteOffer(userDetails, id);
     return ResponseEntity
         .noContent()
         .build();
   }
 
   @GetMapping
-  public ResponseEntity<List<OfferDTO>> getAllOffers() {
+  public ResponseEntity<PagedModel<OfferDTO>> getAllOffers(
+      @AuthenticationPrincipal UserDetails userDetails,
+      @PageableDefault(
+          size = 3,
+          sort="id",
+          direction = Direction.DESC
+      ) Pageable pageable) {
+
+
     return ResponseEntity.ok(
-        offerService.getAllOffers()
+        offerService.getAllOffers(pageable)
     );
   }
+
 
   @PostMapping
   public ResponseEntity<OfferDTO> createOffer(
@@ -66,3 +98,4 @@ public class OfferController {
   }
 
 }
+

@@ -1,6 +1,7 @@
 package com.example.Rehab_offers.model.entity;
 
 import com.example.Rehab_offers.model.enums.DeviceTypeEnum;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,7 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import java.time.Instant;
 
 @Entity
 @Table(name = "offers")
@@ -29,6 +32,10 @@ public class OfferEntity {
 
   @Enumerated(EnumType.STRING)
   private DeviceTypeEnum device;
+
+  @NotNull
+  @Column
+  private Instant created = Instant.now();
 
   public Integer getMileage() {
     return mileage;
@@ -73,4 +80,14 @@ public class OfferEntity {
     this.id = id;
     return this;
   }
+
+ public Instant getCreated() {
+    return created;
+  }
+
+  public OfferEntity setCreated(Instant created) {
+    this.created = created;
+    return this;
+  }
 }
+
