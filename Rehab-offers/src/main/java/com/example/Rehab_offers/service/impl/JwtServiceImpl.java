@@ -19,6 +19,7 @@ public class JwtServiceImpl implements JwtService {
   private final String jwtSecret;
 
   public JwtServiceImpl(@Value("${jwt.secret}") String jwtSecret) {
+
     this.jwtSecret = jwtSecret;
   }
 

@@ -1,7 +1,6 @@
 package com.Rehab_App.repository;
 
 import com.Rehab_App.model.entity.ExRateEntity;
-import com.Rehab_App.model.entity.OfferEntity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -17,7 +17,7 @@ public interface OfferService {
 
   OfferDTO getOfferById(Long id);
 
-  PagedModel<OfferDTO> getAllOffers(Pageable pageable);
+  List<OfferDTO> getAllOffers();
 
   void cleanupOldOffers();
 

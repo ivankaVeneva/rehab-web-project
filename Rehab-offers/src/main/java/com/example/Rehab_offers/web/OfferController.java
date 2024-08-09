@@ -2,7 +2,6 @@ package com.example.Rehab_offers.web;
 
 import com.example.Rehab_offers.model.dto.AddOfferDTO;
 import com.example.Rehab_offers.model.dto.OfferDTO;
-import com.example.Rehab_offers.service.MonitoringService;
 import com.example.Rehab_offers.service.OfferService;
 
 //import io.swagger.v3.oas.annotations.Operation;
@@ -17,14 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,17 +61,23 @@ public class OfferController {
   }
 
   @GetMapping
-  public ResponseEntity<PagedModel<OfferDTO>> getAllOffers(
+  public ResponseEntity<List<OfferDTO>> getAllOffers(
       @AuthenticationPrincipal UserDetails userDetails,
       @PageableDefault(
           size = 3,
           sort="id",
           direction = Direction.DESC
       ) Pageable pageable) {
-
+    if (userDetails != null) {
+      System.out.println("User: " + userDetails.getUsername());
+      System.out.println("Roles: " + userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+              .collect(Collectors.joining(", ")));
+    } else {
+      System.out.println("NO CURRENT USER!");
+    }
 
     return ResponseEntity.ok(
-        offerService.getAllOffers(pageable)
+        offerService.getAllOffers()
     );
   }
 

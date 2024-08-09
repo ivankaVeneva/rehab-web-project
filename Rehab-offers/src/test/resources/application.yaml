@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mobilele
+    name: Rehab-offers
   jpa:
     defer-datasource-initialization: true
     properties:

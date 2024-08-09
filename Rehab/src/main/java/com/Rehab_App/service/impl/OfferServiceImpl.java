@@ -14,14 +14,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
 
 @Service
 public class OfferServiceImpl implements OfferService {
 
-  private Logger LOGGER = LoggerFactory.getLogger(OfferServiceImpl.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(OfferServiceImpl.class);
   private final RestClient offerRestClient;
   private final OfferRepository offerRepository;
   private final ExRateService exRateService;
@@ -29,7 +31,6 @@ public class OfferServiceImpl implements OfferService {
   public OfferServiceImpl(
       @Qualifier("offersRestClient") RestClient offerRestClient,
       OfferRepository offerRepository,
-
       ExRateService exRateService) {
     this.offerRestClient = offerRestClient;
     this.offerRepository = offerRepository;
@@ -40,10 +41,9 @@ public class OfferServiceImpl implements OfferService {
   public void createOffer(AddOfferDTO addOfferDTO) {
     LOGGER.info("Creating new offer...");
 
-    // todo - fix baseUrl.
-    offerRestClient
+        offerRestClient
         .post()
-        .uri("http://localhost:8081/offers")
+        .uri("/offers")
         .body(addOfferDTO)
         .retrieve();
   }
@@ -58,7 +58,7 @@ public class OfferServiceImpl implements OfferService {
 
     return offerRestClient
         .get()
-        .uri("http://localhost:8081/offers/{id}", id)
+        .uri("/offers/{id}", id)
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
         .body(OfferDetailsDTO.class);
@@ -70,9 +70,9 @@ public class OfferServiceImpl implements OfferService {
 
     return offerRestClient
         .get()
-        .uri("http://localhost:8081/offers")
+        .uri("/offers")
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
-        .body(new ParameterizedTypeReference<>(){});
+        .body(new ParameterizedTypeReference<List<OfferSummaryDTO>>(){});
   }
 }

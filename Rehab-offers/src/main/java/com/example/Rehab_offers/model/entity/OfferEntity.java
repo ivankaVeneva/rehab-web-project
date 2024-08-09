@@ -22,6 +22,7 @@ public class OfferEntity {
   private Long id;
 
   @NotEmpty
+  @Column(columnDefinition = "TEXT")//
   private String description;
 
   @Positive
