@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.Rehab_offers.model.entity.OfferEntity;
-import com.Rehab_offers.model.enums.EngineTypeEnum;
+import com.Rehab_offers.model.enums.DeviceTypeEnum;
 import com.Rehab_offers.repository.OfferRepository;
 import com.jayway.jsonpath.JsonPath;
 import java.util.Optional;
